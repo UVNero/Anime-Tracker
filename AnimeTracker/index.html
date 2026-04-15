@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>AnimeTracker</title>
+</head>
+<body>
+
+<h1>My AnimeTracker</h1>
+
+<div id="input-container">
+    <input type="text" id="anime-name" placeholder="Name of the anime" />
+    <input type="number" id="episode-total" placeholder="Total episodes" />
+    <button class="add-btn" id="add-anime">Add</button>
+    <button id="cancel-edit" class="delete-btn" style="display: none;">Cancel Edit</button>
+</div>
+
+<div class="filter-container">
+    <button class="filter-btn" onclick="setFilter(-1)" data-filter="-1">All</button>
+    <button class="filter-btn" onclick="setFilter(0)" data-filter="0">Plan to Watch</button>
+    <button class="filter-btn" onclick="setFilter(1)" data-filter="1">Watching</button>
+    <button class="filter-btn" onclick="setFilter(2)" data-filter="2">Completed</button>
+    <button class="filter-btn" onclick="setFilter(3)" data-filter="3">Dropped</button>
+</div>
+
+<div class="sort-container">
+  <label for="sort-select">Sort by:</label>
+  <select id="sort-select">
+    <option value="title">Title (A-Z)</option>
+    <option value="status">Status</option>
+    <option value="date-asc">Date (Oldest First)</option>
+    <option value="date-desc">Date (Newest First)</option>
+  </select>
+</div>
+
+<ul id="anime-list">
+
+</ul>
+
+<script src="script.js"></script>
+
+</body>
+</html>
