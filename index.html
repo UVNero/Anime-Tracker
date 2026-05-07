@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#151522">
     <link rel="apple-touch-icon" href="icon.png">
-    
+
     <link rel="stylesheet" href="style.css" />
     <title>AnimeTracker | Control Center</title>
 </head>
+
 <body>
 
     <div class="data-vault">
@@ -21,11 +23,19 @@
 
     <h1>My AnimeTracker</h1>
 
-    <div id="input-container">
-        <input type="text" id="anime-name" placeholder="Anime Name" />
-        <input type="number" id="episode-total" placeholder="Episodes" />
-        <button class="add-btn" id="add-anime">Add</button>
-        <button id="cancel-edit" class="delete-btn" style="display: none;">Cancel</button>
+    <div id="input-container" class="multi-input-layout">
+        <div class="input-header">
+            <input type="text" id="anime-name" placeholder="Anime Name" />
+            <div class="main-actions">
+                <button class="add-btn" id="add-anime">Save Anime</button>
+                <button id="cancel-edit" class="delete-btn" style="display: none;">Cancel</button>
+            </div>
+        </div>
+
+        <div id="seasons-input-list">
+        </div>
+
+        <button type="button" id="add-season-field" class="vault-btn">+ Add Season</button>
     </div>
 
     <div class="search-container">
@@ -75,4 +85,5 @@
 
     <script src="script.js" defer></script>
 </body>
+
 </html>
