@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="apple-touch-icon" href="icon.png">
     <title>AnimeTracker</title>
 </head>
 <body>
@@ -15,6 +16,12 @@
     <input type="number" id="episode-total" placeholder="Total episodes" />
     <button class="add-btn" id="add-anime">Add</button>
     <button id="cancel-edit" class="delete-btn" style="display: none;">Cancel Edit</button>
+</div>
+
+<div class ="search-container">
+    <input type="text" id="name-input" placeholder="Search anime..." />
+
+<div id="suggestions" class="suggestions-container"></div>
 </div>
 
 <div class="filter-container">
@@ -39,7 +46,7 @@
 
 </ul>
 
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 
 </body>
 </html>

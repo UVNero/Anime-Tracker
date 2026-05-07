@@ -1,7 +1,7 @@
 /* --- 1. GRUNDDESIGN (Global) --- */
 body {
     font-family: 'Segoe UI', sans-serif;
-    background-color: #1a1a2e;
+    background-color: #151522; /* Smoothes, tiefes Dunkelblau/Grau */
     color: #e9e9e9;
     display: flex;
     flex-direction: column;
@@ -10,121 +10,205 @@ body {
 }
 
 #input-container {
-    background: #16213e;
+    background: #1e2030; /* Hebt sich sanft vom Hintergrund ab */
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 8px;
     margin-bottom: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    display: flex; /* Flexbox auch auf Desktop für einfaches Alignment */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex; 
     gap: 12px;
     width: 100%;
     max-width: 800px;
     box-sizing: border-box;
 }
 
-/* Styling für alle Eingabefelder und Buttons im Header */
+/* --- 2. INPUTS & SUCHE --- */
 #input-container input,
-#input-container button {
-    font-size: 16px;       /* Verhindert Auto-Zoom auf iOS 🍎 */
-    padding: 10px;         /* Angenehme Größe für die Bedienung */
-    border: 1px solid #ccc;
+#input-container select,
+.search-container input {
+    background-color: #2b2d3c; /* Gedecktes Dunkelgrau für die Felder */
+    border: 1px solid #44475a;
+    color: #ffffff;
     border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
     box-sizing: border-box;
+    outline: none;
 }
 
-/* --- 2. DIE LISTE (Responsive Layout) --- */
+#name-input {
+    width: 100%;
+}
+
+#input-container input:focus,
+.search-container input:focus {
+    border-color: #6272a4; /* Sanfter Fokus-Rahmen */
+}
+
+/* --- 3. BUTTONS (Der saubere Look) --- */
+button {
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 10px 15px; 
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:active { transform: scale(0.98); }
+
+/* Der grüne Add-Button aus deinem Screenshot */
+.add-btn { 
+    background-color: #28a745; 
+    color: white;
+}
+.add-btn:hover { background-color: #218838; }
+
+/* Filter Buttons (Smooth & Lesbar) */
+.filter-btn {
+    background-color: #2b2d3c; /* Gleiche Farbe wie die Inputs */
+    color: #e9e9e9;
+    padding: 8px 16px;
+}
+
+.filter-btn:hover {
+    background-color: #3b3d52;
+}
+
+.active-filter {
+    background-color: #44475a; /* Etwas heller für den aktiven Zustand */
+    color: #ffffff;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* --- 4. SUGGESTIONS DROPDOWN --- */
+#suggestions {
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    width: 100%;
+    background: #1e2030;
+    border: 1px solid #44475a;
+    border-top: none;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #2b2d3c;
+    transition: background 0.2s;
+}
+
+.suggestion-item:hover {
+    background: #2b2d3c;
+}
+
+.suggestion-image {
+    width: 40px;
+    height: 55px;
+    object-fit: cover;
+    margin-right: 12px;
+    border-radius: 2px;
+}
+
+.suggestion-title {
+    color: #e9e9e9;
+    font-size: 0.95rem;
+}
+
+/* --- 5. DIE LISTE (Die Datenbank-Einträge) --- */
 #anime-list {
+    list-style: none;
     width: 100%;
     max-width: 800px;
     padding: 0;
 }
 
 #anime-list li {
-    background-color: #16213e;
-    margin: 10px 0;
-    padding: 15px;
+    background-color: #1e2030; /* Passend zum input-container */
+    margin-bottom: 12px;
+    padding: 16px;
     border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    flex-wrap: wrap; /* Erlaubt Umbruch auf Handys 📱 */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #2b2d3c;
 }
 
-/* Info-Bereich (links) */
+#anime-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    border-color: #44475a;
+}
+
+/* Info-Block */
 .anime-info {
     display: flex;
-    flex: 1;
-    align-items: center;
-    gap: 15px;
-    min-width: 250px; /* Verhindert zu starkes Quetschen */
+    flex-direction: column; /* Stapelt Titel und Status auf Mobile besser */
+    gap: 8px;
 }
 
 .anime-title {
-    flex: 5;
-    font-size: 1.1em;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
 }
 
+/* Status-Tags als "Pills" */
 .status-tag {
-    flex: 3;
+    display: inline-block;
     padding: 4px 12px;
     border-radius: 20px;
-    text-align: center;
+    font-size: 0.75rem;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
+/* Status-Farben (Dezent aber klar) */
+.status-plan { background-color: #44475a; color: #e9e9e9; }
+.status-watching { background-color: #6272a4; color: #ffffff; }
+.status-completed { background-color: #28a745; color: #ffffff; }
+.status-dropped { background-color: #dc3545; color: #ffffff; }
+
+/* Progress-Anzeige */
 .episode-progress {
-    flex: 2;
-    text-align: right;
+    font-family: 'Segoe UI', sans-serif;
+    color: #bdc3c7;
+    font-size: 0.9rem;
 }
 
-/* --- 3. MOBILE ANPASSUNGEN (Media Query) --- */
-@media (max-width: 600px) {
-    #input-container {
-        flex-direction: column; /* Stapelt Eingabe & Button untereinander 🥞 */
-    }
-
-    .button-group {
-        width: 100%;
-        justify-content: space-between;
-        display: flex;
-        gap: 8px;
-    }
-
-    .button-group button {
-        flex: 1; /* Buttons füllen die ganze Breite aus ↔️ */
-        text-align: center;
-    }
+/* --- 6. ACTION BUTTONS (Innerhalb der Liste) --- */
+.button-group {
+    display: flex;
+    gap: 8px;
 }
 
-/* --- 4. BUTTON STYLES & FARBEN --- */
-button {
-    border: none;
+.button-group button {
+    padding: 8px 12px;
+    font-size: 0.8rem;
     border-radius: 4px;
-    color: white;
-    padding: 14px 15px; /* Optimale Touch-Größe (~44px Höhe) 🎯 */
-    cursor: pointer;
-    font-weight: bold;
-    transition: opacity 0.2s, transform 0.1s;
 }
 
-button:hover { opacity: 0.8; }
-button:active { transform: scale(0.95); }
+/* Edit & Delete dezenter halten */
+.edit-btn { background-color: #44475a; }
+.delete-btn { background-color: transparent; border: 1px solid #dc3545; color: #dc3545; }
+.delete-btn:hover { background-color: #dc3545; color: white; }
 
-/* Farben */
-.add-btn { background-color: #28a745; }
-.delete-btn { background-color: #dc3545; }
+/* Plus-Button als Highlight */
+.plus-btn { 
+    background-color: #28a745; 
+    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+}
+.plus-btn:hover { background-color: #218838; }
+
 .drop-btn { background-color: #6f42c1; }
-.plus-btn { background-color: #17a2b8; }
-
-/* Status-Farben */
-.status-plan { background-color: #6c757d; }
-.status-watching { background-color: #28a745; }
-.status-completed { background-color: #007bff; }
-.status-dropped { background-color: #dc3545; }
-
-/* Filter-Buttons */
-.active-filter {
-    outline: 2px solid white;
-    background-color: #007bff;
-}
