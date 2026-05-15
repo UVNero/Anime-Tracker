@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#151522">
+    <link rel="apple-touch-icon" href="icon.png">
+
+    <link rel="stylesheet" href="style.css" />
+    <title>AnimeTracker | Control Center</title>
+</head>
+
+<body>
+
+    <div class="data-vault">
+        <button id="export-btn" class="vault-btn">Export JSON</button>
+        <input type="file" id="import-file" style="display: none;">
+        <button id="import-btn" class="vault-btn">Import JSON</button>
+        <button id="export-txt-btn" class="vault-btn">Export TXT</button>
+        <button id="import-txt-btn" class="vault-btn">Import TXT</button>
+        <button id="lang-toggle-btn" class="vault-btn">Lang: </button>
+    </div>
+
+    <h1>My AnimeTracker</h1>
+
+    <div id="input-container" class="multi-input-layout">
+        <div class="input-header">
+            <input type="text" id="anime-name" placeholder="Anime Name" />
+            <div class="main-actions">
+                <button class="add-btn" id="add-anime">Save Anime</button>
+                <button id="cancel-edit" class="delete-btn" style="display: none;">Cancel</button>
+            </div>
+        </div>
+
+        <div id="seasons-input-list">
+        </div>
+
+        <button type="button" id="add-season-field" class="vault-btn">+ Add Season</button>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="name-input" placeholder="Global Search (API)..." />
+        <div id="suggestions" class="suggestions-container"></div>
+    </div>
+
+    <div class="list-search-wrapper">
+        <input type="text" id="list-search-input" placeholder="Search in your list..." />
+    </div>
+
+    <div class="filter-container">
+        <button class="filter-btn" onclick="setFilter(-1)" data-filter="-1">All</button>
+        <button class="filter-btn" onclick="setFilter(0)" data-filter="0">Plan</button>
+        <button class="filter-btn" onclick="setFilter(1)" data-filter="1">Watching</button>
+        <button class="filter-btn" onclick="setFilter(2)" data-filter="2">Done</button>
+        <button class="filter-btn" onclick="setFilter(3)" data-filter="3">Dropped</button>
+    </div>
+
+    <div class="sort-container">
+        <label for="sort-select">Sort by:</label>
+        <select id="sort-select">
+            <option value="progress">Progress (%)</option>
+            <option value="title">Title (A-Z)</option>
+            <option value="status">Status</option>
+            <option value="date-desc">Recently Added</option>
+            <option value="date-asc">Oldest First</option>
+        </select>
+    </div>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <span class="stat-value" id="stat-total-anime">0</span>
+            <span class="stat-label">Anime</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value" id="stat-total-episodes">0</span>
+            <span class="stat-label">Episodes</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-value" id="stat-watchtime">0</span>
+            <span class="stat-label">Completed</span>
+        </div>
+    </div>
+
+    <ul id="anime-list"></ul>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>
